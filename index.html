@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#126b38">
+<title>Krishi Bondhu | কৃষকের ডিজিটাল বন্ধু</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f8f2;color:#203629}
+header{background:#126b38;color:white;padding:17px 15px}
+.brand{font-size:25px;font-weight:bold}
+.tagline{font-size:13px;margin-top:5px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+nav a{color:white;text-decoration:none;font-size:13px;padding:7px}
+select{padding:9px;border-radius:8px;border:0}
+.hero{padding:35px 18px;text-align:center;background:linear-gradient(135deg,#d8f4d7,#eff9e9)}
+.hero h1{color:#126b38;font-size:29px}
+.hero p{line-height:1.7}
+.btn{display:inline-block;background:#126b38;color:white;padding:12px 20px;border-radius:9px;text-decoration:none;margin-top:10px}
+.container{padding:20px 15px;max-width:950px;margin:auto}
+h2{color:#126b38}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:13px}
+.card{background:white;padding:18px 13px;border-radius:13px;box-shadow:0 2px 9px #00000012}
+.card .emoji{font-size:29px}
+.card h3{font-size:17px;color:#126b38}
+.card p{font-size:13px;line-height:1.6}
+.card a{color:#126b38;font-weight:bold;text-decoration:none}
+.notice{background:#fff6dc;padding:14px;border-radius:10px;font-size:13px;line-height:1.6}
+footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🌾 KRISHI BONDHU</div>
+  <div class="tagline" id="tagline">কৃষকের পাশে, প্রতিটি পদক্ষেপে</div>
+  <nav>
+    <a href="#home" id="nav1">হোম</a>
+    <a href="#services" id="nav2">কৃষি পরিষেবা</a>
+    <a href="#contact" id="nav3">যোগাযোগ</a>
+    <select id="language" onchange="changeLanguage()">
+      <option value="bn">বাংলা</option>
+      <option value="hi">हिन्दी</option>
+      <option value="en">English</option>
+    </select>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1 id="welcome">স্বাগতম কৃষি বন্ধুতে!</h1>
+  <p id="intro">কৃষি সংক্রান্ত তথ্য, পরামর্শ, আবহাওয়া ও বাজারদর জানুন এক জায়গায়।</p>
+  <a href="#services" class="btn" id="explore">পরিষেবাগুলি দেখুন</a>
+</section>
+
+<main class="container" id="services">
+  <h2 id="heading">🌱 আমাদের কৃষি পরিষেবা</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="emoji">🌦️</div>
+      <h3 id="t1">আবহাওয়া</h3>
+      <p id="d1">আবহাওয়া ও বৃষ্টির পূর্বাভাস সম্পর্কে জানুন।</p>
+      <a href="https://mausam.imd.gov.in/" target="_blank" id="l1">বিস্তারিত →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">💹</div>
+      <h3 id="t2">ফসলের বাজারদর</h3>
+      <p id="d2">বিভিন্ন ফসলের বাজারদর খুঁজে দেখুন।</p>
+      <a href="https://agmarknet.gov.in/" target="_blank" id="l2">বিস্তারিত →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🏛️</div>
+      <h3 id="t3">সরকারি প্রকল্প</h3>
+      <p id="d3">কৃষকদের সরকারি প্রকল্প ও সুবিধা জানুন।</p>
+      <a href="https://agriwelfare.gov.in/" target="_blank" id="l3">বিস্তারিত →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🌾</div>
+      <h3 id="t4">চাষাবাদ</h3>
+      <p id="d4">বিভিন্ন ফসলের চাষ পদ্ধতি সম্পর্কে জানুন।</p>
+      <a href="https://www.icar.gov.in/" target="_blank" id="l4">বিস্তারিত →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🐛</div>
+      <h3 id="t5">রোগবালাই</h3>
+      <p id="d5">ফসলের রোগ ও প্রতিকার সম্পর্কে জানুন।</p>
+      <a href="https://www.icar.gov.in/" target="_blank" id="l5">বিস্তারিত →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🌱</div>
+      <h3 id="t6">সার ও বীজ</h3>
+      <p id="d6">সার ও বীজের সঠিক ব্যবহার সম্পর্কে জানুন।</p>
+      <a href="https://www.icar.gov.in/" target="_blank" id="l6">বিস্তারিত →</a>
+    </div>
+  </div>
+
+  <h2>📢 গুরুত্বপূর্ণ ঘোষণা</h2>
+  <div class="notice" id="notice">
+    কৃষিকাজে কোনো নতুন ওষুধ বা সার ব্যবহারের আগে কৃষি বিশেষজ্ঞের পরামর্শ নিন।
+  </div>
+</main>
+
+<footer id="contact">
+  <h3>🌾 KRISHI BONDHU</h3>
+  <p id="footerText">কৃষকের ডিজিটাল বন্ধু | পশ্চিমবঙ্গ, ভারত</p>
+  <p>© 2026 Krishi Bondhu</p>
+</footer>
+
+<script>
+const translations = {
+bn: {
+tagline:"কৃষকের পাশে, প্রতিটি পদক্ষেপে",
+nav1:"হোম",nav2:"কৃষি পরিষেবা",nav3:"যোগাযোগ",
+welcome:"স্বাগতম কৃষি বন্ধুতে!",
+intro:"কৃষি সংক্রান্ত তথ্য, পরামর্শ, আবহাওয়া ও বাজারদর জানুন এক জায়গায়।",
+explore:"পরিষেবাগুলি দেখুন",heading:"🌱 আমাদের কৃষি পরিষেবা",
+titles:["আবহাওয়া","ফসলের বাজারদর","সরকারি প্রকল্প","চাষাবাদ","রোগবালাই","সার ও বীজ"],
+descs:["আবহাওয়া ও বৃষ্টির পূর্বাভাস সম্পর্কে জানুন।","বিভিন্ন ফসলের বাজারদর খুঁজে দেখুন।","কৃষকদের সরকারি প্রকল্প ও সুবিধা জানুন।","বিভিন্ন ফসলের চাষ পদ্ধতি সম্পর্কে জানুন।","ফসলের রোগ ও প্রতিকার সম্পর্কে জানুন।","সার ও বীজের সঠিক ব্যবহার সম্পর্কে জানুন।"],
+link:"বিস্তারিত →",notice:"কৃষিকাজে কোনো নতুন ওষুধ বা সার ব্যবহারের আগে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
+footer:"কৃষকের ডিজিটাল বন্ধু | পশ্চিমবঙ্গ, ভারত"
+},
+hi: {
+tagline:"किसान के साथ, हर कदम पर",
+nav1:"होम",nav2:"कृषि सेवाएँ",nav3:"संपर्क",
+welcome:"कृषि बंधु में आपका स्वागत है!",
+intro:"खेती की जानकारी, सलाह, मौसम और बाजार भाव एक ही जगह जानें।",
+explore:"सेवाएँ देखें",heading:"🌱 हमारी कृषि सेवाएँ",
+titles:["मौसम","फसल के बाजार भाव","सरकारी योजनाएँ","खेती","फसल रोग","खाद और बीज"],
+descs:["मौसम और बारिश का पूर्वानुमान जानें।","विभिन्न फसलों के बाजार भाव देखें।","किसानों के लिए सरकारी योजनाएँ जानें।","विभिन्न फसलों की खेती के तरीके जानें।","फसलों के रोग और उपचार जानें।","खाद और बीज के सही उपयोग के बारे में जानें।"],
+link:"विस्तार से →",notice:"नई दवा या खाद का उपयोग करने से पहले कृषि विशेषज्ञ से सलाह लें।",
+footer:"किसानों का डिजिटल मित्र | पश्चिम बंगाल, भारत"
+},
+en: {
+tagline:"With farmers, every step of the way",
+nav1:"Home",nav2:"Services",nav3:"Contact",
+welcome:"Welcome to Krishi Bondhu!",
+intro:"Find farming information, advice, weather and market prices in one place.",
+explore:"Explore Services",heading:"🌱 Our Agriculture Services",
+titles:["Weather","Crop Market Prices","Government Schemes","Farming","Crop Diseases","Fertilizers & Seeds"],
+descs:["Check weather and rainfall forecasts.","Explore market prices of different crops.","Find government schemes for farmers.","Learn cultivation methods for different crops.","Learn about crop diseases and remedies.","Learn the correct use of fertilizers and seeds."],
+link:"Learn More →",notice:"Consult an agriculture expert before using any new pesticide or fertilizer.",
+footer:"Farmers' Digital Friend | West Bengal, India"
+}
+};
+
+function changeLanguage(){
+ const lang=document.getElementById("language").value;
+ const t=translations[lang];
+ document.documentElement.lang=lang;
+ ["tagline","nav1","nav2","nav3","welcome","intro","explore","heading"].forEach(id=>{
+ document.getElementById(id).textContent=t[id];
+ });
+ for(let i=1;i<=6;i++){
+ document.getElementById("t"+i).textContent=t.titles[i-1];
+ document.getElementById("d"+i).textContent=t.descs[i-1];
+ document.getElementById("l"+i).textContent=t.link;
+ }
+ document.getElementById("notice").textContent=t.notice;
+ document.getElementById("footerText").textContent=t.footer;
+}
+</script>
+</body>
+</html>
