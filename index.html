@@ -169,6 +169,7 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
 <script>
 const translations = {
 bn: {
+noticeHeading:"📢 Important Notice",
 tagline:"কৃষকের পাশে, প্রতিটি পদক্ষেপে",
 nav1:"হোম",nav2:"কৃষি পরিষেবা",nav3:"যোগাযোগ",
 welcome:"স্বাগতম কৃষি বন্ধুতে!",
@@ -180,6 +181,7 @@ link:"বিস্তারিত →",notice:"কৃষিকাজে কো�
 footer:"কৃষকের ডিজিটাল বন্ধু | পশ্চিমবঙ্গ, ভারত"
 },
 hi: {
+noticeHeading:"📢 महत्वपूर्ण सूचना",
 tagline:"किसान के साथ, हर कदम पर",
 nav1:"होम",nav2:"कृषि सेवाएँ",nav3:"संपर्क",
 welcome:"कृषि बंधु में आपका स्वागत है!",
@@ -191,6 +193,7 @@ link:"विस्तार से →",notice:"नई दवा या खा�
 footer:"किसानों का डिजिटल मित्र | पश्चिम बंगाल, भारत"
 },
 en: {
+noticeHeading:"📢 Important Notice",
 tagline:"With farmers, every step of the way",
 nav1:"Home",nav2:"Services",nav3:"Contact",
 welcome:"Welcome to Krishi Bondhu!",
@@ -215,6 +218,7 @@ function changeLanguage(){
  document.getElementById("d"+i).textContent=t.descs[i-1];
  document.getElementById("l"+i).textContent=t.link;
  }
+ document.getElementById("noticeHeading").textContent=t.noticeHeading;
  document.getElementById("notice").textContent=t.notice;
  document.getElementById("footerText").textContent=t.footer;
 }
