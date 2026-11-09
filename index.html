@@ -315,10 +315,13 @@ function updateWeatherLanguage() {
 }
 
 const previousChangeLanguage = changeLanguage;
+
 changeLanguage = function() {
   previousChangeLanguage();
   updateWeatherLanguage();
+  loadWeather();
 };
+  
 
 async function loadWeather() {
   const district = document.getElementById("district");
