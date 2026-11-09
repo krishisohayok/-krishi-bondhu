@@ -54,6 +54,44 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
   <a href="#services" class="btn" id="explore">পরিষেবাগুলি দেখুন</a>
 </section>
 
+<section class="weather-section" id="weather">
+  <h2 id="weatherHeading">🌦️ আজকের আবহাওয়া</h2>
+  <p id="weatherIntro">আপনার জেলার বর্তমান আবহাওয়া ও আগামী ৩ দিনের পূর্বাভাস</p>
+
+  <div class="weather-box">
+    <div class="weather-controls">
+      <select id="district">
+        <option value="23.55,87.29">পশ্চিম বর্ধমান</option>
+        <option value="22.57,88.36">কলকাতা</option>
+        <option value="26.72,88.43">দার্জিলিং</option>
+        <option value="22.84,88.62">উত্তর ২৪ পরগনা</option>
+        <option value="23.24,87.86">পূর্ব বর্ধমান</option>
+        <option value="23.34,86.36">পুরুলিয়া</option>
+        <option value="22.45,86.98">ঝাড়গ্রাম</option>
+        <option value="22.57,88.40">দক্ষিণ ২৪ পরগনা</option>
+      </select>
+      <button id="weatherButton" onclick="loadWeather()">আবহাওয়া দেখুন</button>
+    </div>
+
+    <p id="weatherStatus">আবহাওয়ার তথ্য আনা হচ্ছে...</p>
+
+    <div id="weatherResult">
+      <div id="weatherIcon">🌤️</div>
+      <h2 id="temperature">--°C</h2>
+      <p id="weatherDescription">আবহাওয়ার তথ্য</p>
+      <p id="weatherDate"></p>
+
+      <p>💧 আর্দ্রতা: <strong id="humidity">--</strong></p>
+      <p>🌧️ বৃষ্টিপাত: <strong id="rain">--</strong></p>
+      <p>💨 বাতাস: <strong id="wind">--</strong></p>
+      <p>🌡️ অনুভূত তাপমাত্রা: <strong id="feels">--</strong></p>
+
+      <h3 id="forecastHeading">আগামী ৩ দিনের পূর্বাভাস</h3>
+      <div id="forecast"></div>
+    </div>
+  </div>
+</section>
+  
 <main class="container" id="services">
   <h2 id="heading">🌱 আমাদের কৃষি পরিষেবা</h2>
   <div class="grid">
