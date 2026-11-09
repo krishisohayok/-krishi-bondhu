@@ -159,6 +159,185 @@ function changeLanguage(){
  document.getElementById("notice").textContent=t.notice;
  document.getElementById("footerText").textContent=t.footer;
 }
+
+// Krishi Bondhu Weather System
+
+const weatherText = {
+  bn: {
+    heading: "🌦️ আজকের আবহাওয়া",
+    intro: "আপনার জেলার বর্তমান আবহাওয়া ও আগামী ৩ দিনের পূর্বাভাস",
+    button: "আবহাওয়া দেখুন",
+    forecast: "আগামী ৩ দিনের পূর্বাভাস",
+    loading: "আবহাওয়ার তথ্য আনা হচ্ছে...",
+    error: "আবহাওয়ার তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।",
+    humidity: "আর্দ্রতা",
+    rain: "বৃষ্টিপাত",
+    wind: "বাতাস",
+    feels: "অনুভূত তাপমাত্রা"
+  },
+  hi: {
+    heading: "🌦️ आज का मौसम",
+    intro: "आपके जिले का वर्तमान मौसम और अगले 3 दिनों का पूर्वानुमान",
+    button: "मौसम देखें",
+    forecast: "अगले 3 दिनों का पूर्वानुमान",
+    loading: "मौसम की जानकारी लाई जा रही है...",
+    error: "मौसम की जानकारी नहीं मिली। फिर कोशिश करें।",
+    humidity: "नमी",
+    rain: "वर्षा",
+    wind: "हवा",
+    feels: "महसूस होने वाला तापमान"
+  },
+  en: {
+    heading: "🌦️ Today's Weather",
+    intro: "Current weather and 3-day forecast for your district",
+    button: "Check Weather",
+    forecast: "Next 3 Days Forecast",
+    loading: "Loading weather information...",
+    error: "Weather information unavailable. Please try again.",
+    humidity: "Humidity",
+    rain: "Rainfall",
+    wind: "Wind",
+    feels: "Feels like"
+  }
+};
+
+const weatherCodes = {
+  0: ["☀️", "পরিষ্কার আকাশ", "Clear sky", "साफ आसमान"],
+  1: ["🌤️", "মূলত পরিষ্কার", "Mainly clear", "मुख्यतः साफ"],
+  2: ["⛅", "আংশিক মেঘলা", "Partly cloudy", "आंशिक बादल"],
+  3: ["☁️", "মেঘলা", "Overcast", "बादल"],
+  45: ["🌫️", "কুয়াশা", "Fog", "कोहरा"],
+  48: ["🌫️", "ঘন কুয়াশা", "Rime fog", "घना कोहरा"],
+  51: ["🌦️", "হালকা গুঁড়ি বৃষ্টি", "Light drizzle", "हल्की बूंदाबांदी"],
+  53: ["🌦️", "গুঁড়ি বৃষ্টি", "Drizzle", "बूंदाबांदी"],
+  55: ["🌧️", "ঘন গুঁড়ি বৃষ্টি", "Dense drizzle", "तेज बूंदाबांदी"],
+  61: ["🌧️", "হালকা বৃষ্টি", "Light rain", "हल्की बारिश"],
+  63: ["🌧️", "মাঝারি বৃষ্টি", "Moderate rain", "मध्यम बारिश"],
+  65: ["🌧️", "ভারী বৃষ্টি", "Heavy rain", "भारी बारिश"],
+  71: ["🌨️", "হালকা তুষারপাত", "Light snow", "हल्की बर्फबारी"],
+  80: ["🌦️", "বৃষ্টির ঝাপটা", "Rain showers", "बारिश की बौछार"],
+  81: ["🌧️", "মাঝারি বৃষ্টির ঝাপটা", "Rain showers", "बारिश की बौछार"],
+  82: ["⛈️", "ভারী বৃষ্টির ঝাপটা", "Heavy showers", "भारी बौछार"],
+  95: ["⛈️", "বজ্রঝড়", "Thunderstorm", "आंधी-तूफान"]
+};
+
+function getWeatherInfo(code) {
+  const item = weatherCodes[code] || ["🌤️", "আবহাওয়ার তথ্য", "Weather", "मौसम"];
+  const lang = document.documentElement.lang || "bn";
+  const index = lang === "en" ? 2 : lang === "hi" ? 3 : 1;
+  return { icon: item[0], description: item[index] };
+}
+
+function updateWeatherLanguage() {
+  const lang = document.documentElement.lang || "bn";
+  const t = weatherText[lang] || weatherText.bn;
+
+  const labels = {
+    weatherHeading: t.heading,
+    weatherIntro: t.intro,
+    weatherButton: t.button,
+    forecastHeading: t.forecast
+  };
+
+  Object.keys(labels).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = labels[id];
+  });
+
+  const labelIds = {
+    humidityLabel: t.humidity,
+    rainLabel: t.rain,
+    windLabel: t.wind,
+    feelsLabel: t.feels
+  };
+
+  Object.keys(labelIds).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = labelIds[id];
+  });
+}
+
+const previousChangeLanguage = changeLanguage;
+changeLanguage = function() {
+  previousChangeLanguage();
+  updateWeatherLanguage();
+};
+
+async function loadWeather() {
+  const district = document.getElementById("district");
+  const status = document.getElementById("weatherStatus");
+
+  if (!district || !status) return;
+
+  const lang = document.documentElement.lang || "bn";
+  const t = weatherText[lang] || weatherText.bn;
+
+  status.textContent = t.loading;
+
+  try {
+    const [lat, lon] = district.value.split(",").map(Number);
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=3&timezone=auto`;
+
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Weather error");
+
+    const data = await response.json();
+    const current = data.current;
+    const info = getWeatherInfo(current.weather_code);
+
+    document.getElementById("weatherIcon").textContent = info.icon;
+    document.getElementById("temperature").textContent =
+      Math.round(current.temperature_2m) + "°C";
+    document.getElementById("weatherDescription").textContent =
+      info.description;
+
+    document.getElementById("humidity").textContent =
+      current.relative_humidity_2m + "%";
+    document.getElementById("rain").textContent =
+      current.precipitation + " mm";
+    document.getElementById("wind").textContent =
+      current.wind_speed_10m + " km/h";
+    document.getElementById("feels").textContent =
+      Math.round(current.apparent_temperature) + "°C";
+
+    document.getElementById("weatherDate").textContent =
+      new Date().toLocaleDateString(
+        lang === "en" ? "en-IN" : lang === "hi" ? "hi-IN" : "bn-IN",
+        { dateStyle: "full" }
+      );
+
+    const forecast = document.getElementById("forecast");
+    forecast.innerHTML = "";
+
+    data.daily.time.forEach((date, i) => {
+      const dayInfo = getWeatherInfo(data.daily.weather_code[i]);
+      const day = new Date(date + "T12:00:00").toLocaleDateString(
+        lang === "en" ? "en-IN" : lang === "hi" ? "hi-IN" : "bn-IN",
+        { weekday: "long" }
+      );
+
+      forecast.innerHTML += `
+        <div class="forecast-day">
+          <strong>${day}</strong>
+          <div>${dayInfo.icon}</div>
+          <div>${dayInfo.description}</div>
+          <div>${Math.round(data.daily.temperature_2m_max[i])}°C /
+          ${Math.round(data.daily.temperature_2m_min[i])}°C</div>
+          <div>🌧️ ${data.daily.precipitation_probability_max[i]}%</div>
+        </div>
+      `;
+    });
+
+    status.textContent = "";
+  } catch (error) {
+    status.textContent = t.error;
+  }
+}
+
+updateWeatherLanguage();
+loadWeather();
+      
 </script>
 </body>
 </html>
