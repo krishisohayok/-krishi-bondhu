@@ -29,6 +29,64 @@ h2{color:#126b38}
 .card a{color:#126b38;font-weight:bold;text-decoration:none}
 .notice{background:#fff6dc;padding:14px;border-radius:10px;font-size:13px;line-height:1.6}
 footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:13px}
+
+/* Weather mobile layout improvement */
+
+.weather-section {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+.weather-box {
+  width: 100%;
+  padding: 18px;
+  margin: 15px auto;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #00000012;
+}
+
+.weather-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.weather-controls select,
+.weather-controls button {
+  max-width: 100%;
+  min-height: 42px;
+  border-radius: 8px;
+}
+
+#weatherResult {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+#forecast {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.forecast-day {
+  min-width: 0;
+  padding: 12px 5px;
+  text-align: center;
+  background: #eff8ed;
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 400px) {
+  #forecast {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
