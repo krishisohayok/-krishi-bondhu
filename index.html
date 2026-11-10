@@ -260,8 +260,9 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
 const translations = {
 bn: {
 noticeHeading:"📢 Important Notice",
+adviceHeading: "🌱 আবহাওয়া অনুযায়ী কৃষি পরামর্শ",
 tagline:"কৃষকের পাশে, প্রতিটি পদক্ষেপে",
-nav1:"হোম",nav2:"কৃষি পরিষেবা",nav3:"যোগাযোগ",
+nav1tagline:\"কৃষকের পাশে, প্রতিটি পদক্ষেপে\",:"হোম",nav2:"কৃষি পরিষেবা",nav3:"যোগাযোগ",
 welcome:"স্বাগতম কৃষি বন্ধুতে!",
 intro:"কৃষি সংক্রান্ত তথ্য, পরামর্শ, আবহাওয়া ও বাজারদর জানুন এক জায়গায়।",
 explore:"পরিষেবাগুলি দেখুন",heading:"🌱 আমাদের কৃষি পরিষেবা",
@@ -272,6 +273,7 @@ footer:"কৃষকের ডিজিটাল বন্ধু | পশ্চ�
 },
 hi: {
 noticeHeading:"📢 महत्वपूर्ण सूचना",
+adviceHeading: "🌱 मौसम के अनुसार कृषि सलाह",
 tagline:"किसान के साथ, हर कदम पर",
 nav1:"होम",nav2:"कृषि सेवाएँ",nav3:"संपर्क",
 welcome:"कृषि बंधु में आपका स्वागत है!",
@@ -284,6 +286,7 @@ footer:"किसानों का डिजिटल मित्र | पश
 },
 en: {
 noticeHeading:"📢 Important Notice",
+adviceHeading: "🌱 Weather-Based Farming Advice",
 tagline:"With farmers, every step of the way",
 nav1:"Home",nav2:"Services",nav3:"Contact",
 welcome:"Welcome to Krishi Bondhu!",
@@ -300,7 +303,7 @@ function changeLanguage(){
  const lang=document.getElementById("language").value;
  const t=translations[lang];
  document.documentElement.lang=lang;
- ["tagline","nav1","nav2","nav3","welcome","intro","explore","heading"].forEach(id=>{
+ ["tagline","nav1","nav2","nav3","welcome","intro","explore","heading","adviceHeading"].forEach(id=>{
  document.getElementById(id).textContent=t[id];
  });
  for(let i=1;i<=6;i++){
