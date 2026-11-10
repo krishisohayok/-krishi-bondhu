@@ -87,6 +87,30 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
     grid-template-columns: 1fr;
   }
 }
+/* Farming Advice Design */
+
+.advice-box {
+  background: #ffffff;
+  padding: 18px;
+  margin: 18px 0;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px #00000012;
+}
+
+.advice-box h2 {
+  color: #126b38;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+#farmingAdvice {
+  background: #eff8ed;
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 1.8;
+  font-size: 15px;
+}
+  
 </style>
 </head>
 <body>
@@ -167,6 +191,14 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
       <div id="forecast"></div>
     </div>
   </div>
+  
+<div class="advice-box">
+  <h2 id="adviceHeading">🌱 আবহাওয়া অনুযায়ী কৃষি পরামর্শ</h2>
+  <div id="farmingAdvice">
+    আবহাওয়ার তথ্য পাওয়ার পর কৃষি পরামর্শ এখানে দেখানো হবে।
+  </div>
+</div>
+  
 </section>
   
 <main class="container" id="services">
@@ -390,6 +422,60 @@ changeLanguage = function() {
 };
   
 
+function updateFarmingAdvice(current, daily) {
+  const lang = document.documentElement.lang || "bn";
+  const box = document.getElementById("farmingAdvice");
+
+  if (!box) return;
+
+  const temp = current.temperature_2m;
+  const rain = daily.precipitation_probability_max[0] || 0;
+  const code = current.weather_code;
+  const wind = current.wind_speed_10m;
+
+  let advice = [];
+
+  if (code >= 95) {
+    advice.push(
+      "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।"
+    );
+  }
+
+  if (rain >= 60) {
+    advice.push(
+      "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।"
+    );
+  }
+
+  if (temp >= 35) {
+    advice.push(
+      "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।"
+    );
+  }
+
+  if (wind >= 30) {
+    advice.push(
+      "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।"
+    );
+  }
+
+  if (code >= 45 && code <= 48) {
+    advice.push(
+      "🌫️ কুয়াশা রয়েছে। ফসল পর্যবেক্ষণ করুন এবং রোগের লক্ষণ দেখা গেলে কৃষি বিশেষজ্ঞের পরামর্শ নিন।"
+    );
+  }
+
+  if (advice.length === 0) {
+    advice.push(
+      "🌱 আবহাওয়া আপাতত স্বাভাবিক। জমির আর্দ্রতা দেখে প্রয়োজন অনুযায়ী সেচ দিন এবং ফসলের পরিচর্যা করুন।"
+    );
+  }
+
+  box.innerHTML = advice.map(item =>
+    `<p>${item}</p>`
+  ).join("");
+}
+  
 async function loadWeather() {
   const district = document.getElementById("district");
   const status = document.getElementById("weatherStatus");
@@ -411,6 +497,7 @@ async function loadWeather() {
 
     const data = await response.json();
     const current = data.current;
+    updateFarmingAdvice(current, data.daily);
     const info = getWeatherInfo(current.weather_code);
 
     document.getElementById("weatherIcon").textContent = info.icon;
