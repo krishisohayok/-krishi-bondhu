@@ -433,48 +433,67 @@ function updateFarmingAdvice(current, daily) {
   const code = current.weather_code;
   const wind = current.wind_speed_10m;
 
+  const messages = {
+    bn: {
+      storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
+      rain: "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।",
+      heat: "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।",
+      wind: "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।",
+      fog: "🌫️ কুয়াশা রয়েছে। ফসল পর্যবেক্ষণ করুন এবং রোগের লক্ষণ দেখা গেলে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
+      normal: "🌱 আবহাওয়া আপাতত স্বাভাবিক। জমির আর্দ্রতা দেখে প্রয়োজন অনুযায়ী সেচ দিন এবং ফসলের পরিচর্যা করুন।"
+    },
+
+    hi: {
+      storm: "⛈️ गरज के साथ तूफान है। खेत में काम बंद करें और सुरक्षित स्थान पर रहें।",
+      rain: "🌧️ बारिश की संभावना अधिक है। खेत में जल निकासी की व्यवस्था रखें और सिंचाई से पहले मौसम देखें।",
+      heat: "☀️ तापमान अधिक है। मिट्टी में नमी बनाए रखें और संभव हो तो सुबह या शाम सिंचाई करें।",
+      wind: "💨 हवा तेज है। पौधों के सहारे और फसल की स्थिति जांचें।",
+      fog: "🌫️ कोहरा है। फसल पर नजर रखें और रोग के लक्षण दिखने पर कृषि विशेषज्ञ से सलाह लें।",
+      normal: "🌱 मौसम फिलहाल सामान्य है। मिट्टी की नमी देखकर जरूरत के अनुसार सिंचाई करें और फसल की देखभाल करें।"
+    },
+
+    en: {
+      storm: "⛈️ Thunderstorm detected. Stop field work and stay in a safe shelter.",
+      rain: "🌧️ High chance of rain. Ensure proper field drainage and check the forecast before irrigation.",
+      heat: "☀️ Temperature is high. Maintain soil moisture and irrigate in the morning or evening if needed.",
+      wind: "💨 Strong winds detected. Check crop supports and plant stakes.",
+      fog: "🌫️ Fog is present. Monitor crops and consult an agriculture expert if disease symptoms appear.",
+      normal: "🌱 Weather is currently normal. Check soil moisture, irrigate when needed and take care of your crops."
+    }
+  };
+
+  const t = messages[lang] || messages.bn;
   let advice = [];
 
   if (code >= 95) {
-    advice.push(
-      "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।"
-    );
+    advice.push(t.storm);
   }
 
   if (rain >= 60) {
-    advice.push(
-      "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।"
-    );
+    advice.push(t.rain);
   }
 
   if (temp >= 35) {
-    advice.push(
-      "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।"
-    );
+    advice.push(t.heat);
   }
 
   if (wind >= 30) {
-    advice.push(
-      "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।"
-    );
+    advice.push(t.wind);
   }
 
   if (code >= 45 && code <= 48) {
-    advice.push(
-      "🌫️ কুয়াশা রয়েছে। ফসল পর্যবেক্ষণ করুন এবং রোগের লক্ষণ দেখা গেলে কৃষি বিশেষজ্ঞের পরামর্শ নিন।"
-    );
+    advice.push(t.fog);
   }
 
   if (advice.length === 0) {
-    advice.push(
-      "🌱 আবহাওয়া আপাতত স্বাভাবিক। জমির আর্দ্রতা দেখে প্রয়োজন অনুযায়ী সেচ দিন এবং ফসলের পরিচর্যা করুন।"
-    );
+    advice.push(t.normal);
   }
 
   box.innerHTML = advice.map(item =>
     `<p>${item}</p>`
   ).join("");
 }
+  
   
 async function loadWeather() {
   const district = document.getElementById("district");
