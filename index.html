@@ -293,29 +293,7 @@ function getWeatherInfo(code) {
   const index = lang === "en" ? 2 : lang === "hi" ? 3 : 1;
   return { icon: item[0], description: item[index] };
 }
-const weatherText = {
-  bn: {
-    heading: "আবহাওয়ার তথ্য",
-    intro: "আপনার এলাকার আবহাওয়া জানুন",
-    button: "আবহাওয়া দেখুন",
-    forecast: "আবহাওয়ার পূর্বাভাস",
-    humidity: "আর্দ্রতা",
-    rain: "বৃষ্টিপাত",
-    wind: "বাতাসের গতি",
-    feels: "অনুভূত তাপমাত্রা"
-  },
 
-  en: {
-    heading: "Weather Information",
-    intro: "Know the weather in your area",
-    button: "Check Weather",
-    forecast: "Weather Forecast",
-    humidity: "Humidity",
-    rain: "Rainfall",
-    wind: "Wind Speed",
-    feels: "Feels Like"
-  }
-};
 function updateWeatherLanguage() {
   const lang = document.documentElement.lang || "bn";
   const t = weatherText[lang] || weatherText.bn;
