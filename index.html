@@ -304,7 +304,8 @@ function changeLanguage(){
  const t=translations[lang];
  document.documentElement.lang=lang;
  ["tagline","nav1","nav2","nav3","welcome","intro","explore","heading","adviceHeading"].forEach(id=>{
- document.getElementById(id).textContent=t[id];
+ const el = document.getElementById(id);
+if (el && t[id]) el.textContent = t[id];
  });
  for(let i=1;i<=6;i++){
  document.getElementById("t"+i).textContent=t.titles[i-1];
