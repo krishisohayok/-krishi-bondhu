@@ -259,7 +259,7 @@ footer{background:#126b38;color:white;text-align:center;padding:22px;font-size:1
 <script>
 const translations = {
 bn: {
-noticeHeading:"📢 Important Notice",
+noticeHeading:"📢 গুরুত্বপূর্ণ বিজ্ঞপ্তি",
 adviceHeading: "🌱 আবহাওয়া অনুযায়ী কৃষি পরামর্শ",
 tagline:"কৃষকের পাশে, প্রতিটি পদক্ষেপে",
 nav1:"হোম",nav2:"কৃষি পরিষেবা",nav3:"যোগাযোগ",
@@ -434,7 +434,7 @@ changeLanguage = function() {
   const rain = daily.precipitation_probability_max[0] || 0;
   const code = current.weather_code;
   const wind = current.wind_speed_10m;
-  const humidity = daily.relative_humidity_2m_mean[0] || 0;
+  const humidity = current.relative_humidity_2m || 0;
   const rainAmount = daily.precipitation_sum[0] || 0;
   const messages = {
     bn: {
@@ -525,7 +525,7 @@ async function loadWeather() {
   try {
     const [lat, lon] = district.value.split(",").map(Number);
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,relative_humidity_2m_mean&forecast_days=3&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&forecast_days=3&timezone=auto`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error("Weather error");
