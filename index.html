@@ -434,13 +434,14 @@ changeLanguage = function() {
   const rain = daily.precipitation_probability_max[0] || 0;
   const code = current.weather_code;
   const wind = current.wind_speed_10m;
-
+const humidity = daily.relative_humidity_2m_mean[0] || 0;
   const messages = {
     bn: {
       storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
       rain: "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।",
       heat: "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।",
       wind: "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।",
+      humidity: "💧 বাতাসে আর্দ্রতা বেশি। ফসলে ছত্রাকজনিত রোগের লক্ষণ দেখুন এবং জমিতে অতিরিক্ত জল জমতে দেবেন না।",
       fog: "🌫️ কুয়াশা রয়েছে। ফসল পর্যবেক্ষণ করুন এবং রোগের লক্ষণ দেখা গেলে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
       normal: "🌱 আবহাওয়া আপাতত স্বাভাবিক। জমির আর্দ্রতা দেখে প্রয়োজন অনুযায়ী সেচ দিন এবং ফসলের পরিচর্যা করুন।"
     },
@@ -450,6 +451,7 @@ changeLanguage = function() {
       rain: "🌧️ बारिश की संभावना अधिक है। खेत में जल निकासी की व्यवस्था रखें और सिंचाई से पहले मौसम देखें।",
       heat: "☀️ तापमान अधिक है। मिट्टी में नमी बनाए रखें और संभव हो तो सुबह या शाम सिंचाई करें।",
       wind: "💨 हवा तेज है। पौधों के सहारे और फसल की स्थिति जांचें।",
+      humidity: "💧 नमी अधिक है। फसल में फफूंद जनित रोगों के लक्षण देखें और खेत में पानी जमा न होने दें।",
       fog: "🌫️ कोहरा है। फसल पर नजर रखें और रोग के लक्षण दिखने पर कृषि विशेषज्ञ से सलाह लें।",
       normal: "🌱 मौसम फिलहाल सामान्य है। मिट्टी की नमी देखकर जरूरत के अनुसार सिंचाई करें और फसल की देखभाल करें।"
     },
@@ -459,6 +461,7 @@ changeLanguage = function() {
       rain: "🌧️ High chance of rain. Ensure proper field drainage and check the forecast before irrigation.",
       heat: "☀️ Temperature is high. Maintain soil moisture and irrigate in the morning or evening if needed.",
       wind: "💨 Strong winds detected. Check crop supports and plant stakes.",
+      humidity: "💧 Humidity is high. Watch for signs of fungal disease on crops and avoid waterlogging in the field.",
       fog: "🌫️ Fog is present. Monitor crops and consult an agriculture expert if disease symptoms appear.",
       normal: "🌱 Weather is currently normal. Check soil moisture, irrigate when needed and take care of your crops."
     }
@@ -484,7 +487,9 @@ changeLanguage = function() {
   if (wind >= 30) {
     advice.push(t.wind);
   }
-
+if (humidity >= 85) {
+  advice.push(t.humidity);
+}
   if (code >= 45 && code <= 48) {
     advice.push(t.fog);
   }
