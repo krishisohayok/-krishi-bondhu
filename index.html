@@ -424,9 +424,7 @@ changeLanguage = function() {
   updateWeatherLanguage();
   loadWeather();
 };
-  
-
-function updateFarmingAdvice(current, daily) {
+  function updateFarmingAdvice(current, daily) {
   const lang = document.documentElement.lang || "bn";
   const box = document.getElementById("farmingAdvice");
 
@@ -466,6 +464,8 @@ function updateFarmingAdvice(current, daily) {
     }
   };
 
+
+
   const t = messages[lang] || messages.bn;
   let advice = [];
 
@@ -492,6 +492,7 @@ function updateFarmingAdvice(current, daily) {
   if (advice.length === 0) {
     advice.push(t.normal);
   }
+  
 
   box.innerHTML = advice.map(item =>
     `<p>${item}</p>`
@@ -513,7 +514,7 @@ async function loadWeather() {
   try {
     const [lat, lon] = district.value.split(",").map(Number);
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=3&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,relative_humidity_2m_mean&forecast_days=3&timezone=auto`;
 
     const response = await fetch(url);
     if (!response.ok) throw new Error("Weather error");
