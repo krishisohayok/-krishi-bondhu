@@ -434,14 +434,16 @@ changeLanguage = function() {
   const rain = daily.precipitation_probability_max[0] || 0;
   const code = current.weather_code;
   const wind = current.wind_speed_10m;
-const humidity = daily.relative_humidity_2m_mean[0] || 0;
+  const humidity = daily.relative_humidity_2m_mean[0] || 0;
+  const rainAmount = daily.precipitation_sum[0] || 0;
   const messages = {
     bn: {
-      storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
+      humidity: \"💧 Humidity is high. Watch for signs of fungal disease on crops and avoid waterlogging in the field.\",storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
       rain: "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।",
       heat: "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।",
       wind: "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।",
       humidity: "💧 বাতাসে আর্দ্রতা বেশি। ফসলে ছত্রাকজনিত রোগের লক্ষণ দেখুন এবং জমিতে অতিরিক্ত জল জমতে দেবেন না।",
+      dry: "🚿 বৃষ্টির সম্ভাবনা কম। মাটির আর্দ্রতা পরীক্ষা করুন এবং প্রয়োজন হলে সেচ দিন।",
       fog: "🌫️ কুয়াশা রয়েছে। ফসল পর্যবেক্ষণ করুন এবং রোগের লক্ষণ দেখা গেলে কৃষি বিশেষজ্ঞের পরামর্শ নিন।",
       normal: "🌱 আবহাওয়া আপাতত স্বাভাবিক। জমির আর্দ্রতা দেখে প্রয়োজন অনুযায়ী সেচ দিন এবং ফসলের পরিচর্যা করুন।"
     },
@@ -452,9 +454,10 @@ const humidity = daily.relative_humidity_2m_mean[0] || 0;
       heat: "☀️ तापमान अधिक है। मिट्टी में नमी बनाए रखें और संभव हो तो सुबह या शाम सिंचाई करें।",
       wind: "💨 हवा तेज है। पौधों के सहारे और फसल की स्थिति जांचें।",
       humidity: "💧 नमी अधिक है। फसल में फफूंद जनित रोगों के लक्षण देखें और खेत में पानी जमा न होने दें।",
+      dry: "🚿 बारिश की संभावना कम है। मिट्टी की नमी जांचें और जरूरत होने पर सिंचाई करें।",
       fog: "🌫️ कोहरा है। फसल पर नजर रखें और रोग के लक्षण दिखने पर कृषि विशेषज्ञ से सलाह लें।",
       normal: "🌱 मौसम फिलहाल सामान्य है। मिट्टी की नमी देखकर जरूरत के अनुसार सिंचाई करें और फसल की देखभाल करें।"
-    },
+    if (advice.length === 0) {},
 
     en: {
       storm: "⛈️ Thunderstorm detected. Stop field work and stay in a safe shelter.",
@@ -462,6 +465,7 @@ const humidity = daily.relative_humidity_2m_mean[0] || 0;
       heat: "☀️ Temperature is high. Maintain soil moisture and irrigate in the morning or evening if needed.",
       wind: "💨 Strong winds detected. Check crop supports and plant stakes.",
       humidity: "💧 Humidity is high. Watch for signs of fungal disease on crops and avoid waterlogging in the field.",
+      dry: "🚿 Low chance of rain. Check soil moisture and irrigate if needed.",
       fog: "🌫️ Fog is present. Monitor crops and consult an agriculture expert if disease symptoms appear.",
       normal: "🌱 Weather is currently normal. Check soil moisture, irrigate when needed and take care of your crops."
     }
@@ -479,7 +483,9 @@ const humidity = daily.relative_humidity_2m_mean[0] || 0;
   if (rain >= 60) {
     advice.push(t.rain);
   }
-
+if (rain < 30 && rainAmount < 1) {
+  advice.push(t.dry);
+}
   if (temp >= 35) {
     advice.push(t.heat);
   }
