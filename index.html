@@ -329,6 +329,7 @@ const weatherText = {
     button: "আবহাওয়া দেখুন",
     forecast: "আগামী ৩ দিনের পূর্বাভাস",
     loading: "আবহাওয়ার তথ্য আনা হচ্ছে...",
+    success: "আবহাওয়ার তথ্য আপডেট হয়েছে।",
     error: "আবহাওয়ার তথ্য পাওয়া যায়নি। আবার চেষ্টা করুন।",
     humidity: "আর্দ্রতা",
     rain: "বৃষ্টিপাত",
@@ -341,6 +342,7 @@ const weatherText = {
     button: "मौसम देखें",
     forecast: "अगले 3 दिनों का पूर्वानुमान",
     loading: "मौसम की जानकारी लाई जा रही है...",
+    success: "मौसम की जानकारी अपडेट हो गई है।",
     error: "मौसम की जानकारी नहीं मिली। फिर कोशिश करें।",
     humidity: "नमी",
     rain: "वर्षा",
@@ -353,6 +355,7 @@ const weatherText = {
     button: "Check Weather",
     forecast: "Next 3 Days Forecast",
     loading: "Loading weather information...",
+    success: "Weather information updated successfully.",
     error: "Weather information unavailable. Please try again.",
     humidity: "Humidity",
     rain: "Rainfall",
@@ -515,7 +518,7 @@ if (humidity >= 85) {
 async function loadWeather() {
   const district = document.getElementById("district");
   const status = document.getElementById("weatherStatus");
-
+  const lang = document.getElementById("language").value;
   if (!district || !status) return;
 
   const lang = document.documentElement.lang || "bn";
@@ -533,9 +536,9 @@ console.log("Weather API:", response.status);
 
 if (!response.ok) throw new Error("Weather error");
 
-status.textContent = "আবহাওয়ার তথ্য আপডেট হয়েছে।";
+const data = await response.json();
 
-    const data = await response.json();
+status.textContent = weatherText[lang].success;
     const current = data.current;
     updateFarmingAdvice(current, data.daily);
     const info = getWeatherInfo(current.weather_code);
