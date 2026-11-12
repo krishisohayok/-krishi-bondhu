@@ -438,7 +438,7 @@ changeLanguage = function() {
   const rainAmount = daily.precipitation_sum[0] || 0;
   const messages = {
     bn: {
-      humidity: \"💧 Humidity is high. Watch for signs of fungal disease on crops and avoid waterlogging in the field.\",storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
+      storm: "⛈️ বজ্রঝড় হচ্ছে। মাঠে কাজ বন্ধ রাখুন এবং নিরাপদ আশ্রয়ে থাকুন।",
       rain: "🌧️ বৃষ্টির সম্ভাবনা বেশি। জমিতে জল নিষ্কাশনের ব্যবস্থা রাখুন এবং সেচের আগে আবহাওয়া দেখুন।",
       heat: "☀️ তাপমাত্রা বেশি। মাটির আর্দ্রতা বজায় রাখুন এবং সম্ভব হলে সকাল বা বিকেলে সেচ দিন।",
       wind: "💨 বাতাসের গতি বেশি। গাছের খুঁটি ও ফসলের সাপোর্ট পরীক্ষা করুন।",
@@ -457,7 +457,9 @@ changeLanguage = function() {
       dry: "🚿 बारिश की संभावना कम है। मिट्टी की नमी जांचें और जरूरत होने पर सिंचाई करें।",
       fog: "🌫️ कोहरा है। फसल पर नजर रखें और रोग के लक्षण दिखने पर कृषि विशेषज्ञ से सलाह लें।",
       normal: "🌱 मौसम फिलहाल सामान्य है। मिट्टी की नमी देखकर जरूरत के अनुसार सिंचाई करें और फसल की देखभाल करें।"
-    if (advice.length === 0) {},
+},
+
+en: {
 
     en: {
       storm: "⛈️ Thunderstorm detected. Stop field work and stay in a safe shelter.",
