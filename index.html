@@ -530,7 +530,7 @@ async function loadWeather() {
     const [lat, lon] = district.value.split(",").map(Number);
 
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&forecast_days=3&timezone=auto`;
-    status.textContent = "API-তে যোগাযোগ করা হচ্ছে...";
+    status.textContent = weatherText[lang].loading;
     const response = await fetch(url);
 console.log("Weather API:", response.status);
 
