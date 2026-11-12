@@ -529,9 +529,11 @@ async function loadWeather() {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum&forecast_days=3&timezone=auto`;
     status.textContent = "API-তে যোগাযোগ করা হচ্ছে...";
     const response = await fetch(url);
-    status.textContent = "API থেকে উত্তর এসেছে!";
-    console.log("Weather API:", response.status);
-    if (!response.ok) throw new Error("Weather error");
+console.log("Weather API:", response.status);
+
+if (!response.ok) throw new Error("Weather error");
+
+status.textContent = "আবহাওয়ার তথ্য আপডেট হয়েছে।";
 
     const data = await response.json();
     const current = data.current;
